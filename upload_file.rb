@@ -11,16 +11,19 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require File.expand_path(File.dirname(__FILE__) + '/../samples_config')
+require File.expand_path(File.dirname(__FILE__) + '/samples_config')
 
-(bucket_name, file_name) = ARGV
-unless bucket_name && file_name
-  puts "Usage: upload_file.rb <BUCKET_NAME> <FILE_NAME>"
+(file_name,) = ARGV
+unless file_name
+  puts "Usage: upload_file.rb <FILE_NAME>"
   exit 1
 end
 
 # get an instance of the S3 interface using the default configuration
 s3 = AWS::S3.new
+
+# build a unique bucket name based on the access key
+bucket_name = "ruby-sdk-sample-#{AWS.config.access_key_id}"
 
 # create a bucket
 b = s3.buckets.create(bucket_name)
