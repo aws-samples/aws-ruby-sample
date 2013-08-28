@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require File.expand_path(File.dirname(__FILE__) + '/samples_config')
+require 'uuid'
 
 (file_name,) = ARGV
 unless file_name
@@ -22,8 +23,9 @@ end
 # get an instance of the S3 interface using the default configuration
 s3 = AWS::S3.new
 
-# build a unique bucket name based on the access key
-bucket_name = "ruby-sdk-sample-#{AWS.config.access_key_id}"
+# build a unique bucket name based on a unique ID
+uuid = UUID.new
+bucket_name = "ruby-sdk-sample-#{uuid.generate}"
 
 # create a bucket
 b = s3.buckets.create(bucket_name)
