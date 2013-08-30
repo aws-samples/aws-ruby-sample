@@ -10,7 +10,7 @@ The only requirement of this application is bundler. All other dependencies can 
 
 ## Basic Configuration
 
-You need to set your AWS security credentials in `samples/config.yml` before the sample
+You need to set your AWS security credentials in `config.yml` before the sample
 is able to connect to AWS. This file should contain:
 
     access_key_id: <your access key id>
@@ -23,18 +23,17 @@ for more information on getting your keys.
 
 This sample application connects to Amazon's [Simple Storage Service (S3)](http://aws.amazon.com/s3),
 creates a bucket, and uploads a file to that bucket. We've already included a
-file for you to upload (`samples/s3/hello_world.txt`) and the `upload_file.rb`
-script will generate a unique bucket name for you. The S3 documentation has a
-good overview of the [restrictions for bucket names](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
-for when you start making your own buckets.
-
-To run the sample:
+file to upload (`hello_world.txt`) and the `upload_file.rb` script will generate
+a unique bucket name for you. All you need to do is run it:
 
     ruby upload_file.rb hello_world.txt
 
+The S3 documentation has a good overview of the [restrictions for bucket names](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
+for when you start making your own buckets.
+
 ## License
 
-The SDK and this sample application are distributed under the
+This sample application is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 ```no-highlight
