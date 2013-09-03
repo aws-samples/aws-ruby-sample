@@ -1,10 +1,10 @@
 # AWS SDK for Ruby Sample Project
 
-A simple Ruby application illustrating usage of the AWS SDK for Ruby (aws-sdk gem).
+A simple Ruby application illustrating usage of the AWS SDK for Ruby ([aws-sdk gem](http://rubygems.org/gems/aws-sdk)).
 
 ## Requirements
 
-The only requirement of this application is bundler. All other dependencies can be installed with:
+The only requirement of this application is [Bundler](http://bundler.io). All other dependencies can be installed with:
     
     bundle install
 
