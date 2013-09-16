@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
@@ -11,12 +13,15 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require File.expand_path(File.dirname(__FILE__) + '/samples_config')
+#require File.expand_path(File.dirname(__FILE__) + '/samples_config')
+require 'rubygems'
+require 'bundler/setup'
+require 'aws-sdk'
 require 'uuid'
 
 (file_name,) = ARGV
 unless file_name
-  puts "Usage: upload_file.rb <FILE_NAME>"
+  puts "Usage: s3_sample.rb <FILE_NAME>"
   exit 1
 end
 

@@ -5,16 +5,16 @@ A simple Ruby application illustrating usage of the AWS SDK for Ruby ([aws-sdk g
 ## Requirements
 
 The only requirement of this application is [Bundler](http://bundler.io). All other dependencies can be installed with:
-    
+
     bundle install
 
 ## Basic Configuration
 
-You need to set your AWS security credentials in `config.yml` before the sample
-is able to connect to AWS. This file should contain:
+You need to set your AWS security credentials before the sample
+is able to connect to AWS. The AWS SDK for Ruby will automatically read these from the environment:
 
-    access_key_id: <your access key id>
-    secret_access_key: <your secret key>
+    export AWS_ACCESS_KEY_ID='...'
+    export AWS_SECRET_ACCESS_KEY='...'
 
 See the [Security Credentials](http://aws.amazon.com/security-credentials) page
 for more information on getting your keys.
@@ -26,7 +26,7 @@ creates a bucket, and uploads a file to that bucket. We've already included a
 file to upload (`hello_world.txt`) and the `upload_file.rb` script will generate
 a unique bucket name for you. All you need to do is run it:
 
-    ruby upload_file.rb hello_world.txt
+    ruby s3_sample.rb hello_world.txt
 
 The S3 documentation has a good overview of the [restrictions for bucket names](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
 for when you start making your own buckets.
