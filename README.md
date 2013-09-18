@@ -8,6 +8,10 @@ The only requirement of this application is [Bundler](http://bundler.io). All ot
 
     bundle install
 
+You can also install the SDK directly with:
+
+    gem install aws-sdk
+
 ## Basic Configuration
 
 You need to set your AWS security credentials before the sample
