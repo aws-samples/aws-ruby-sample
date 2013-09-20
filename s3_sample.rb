@@ -18,35 +18,54 @@ require 'bundler/setup'
 require 'aws-sdk'
 require 'uuid'
 
-(file_name,) = ARGV
-unless file_name
-  puts "Usage: s3_sample.rb <FILE_NAME>"
-  exit 1
-end
-
-# get an instance of the S3 interface using the default configuration
+# Instantiate a new client for Amazon Simple Storage Service (S3). With no
+# parameters or configuration, the AWS SDK for Ruby will look for access keys
+# and region in these environment variables:
+#
+#    AWS_ACCESS_KEY_ID='...'
+#    AWS_SECRET_ACCESS_KEY='...'
+#    AWS_REGION='...'
+#
+# For more information about this interface to Amazon S3, see:
+# http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3.html
 s3 = AWS::S3.new
 
-# build a unique bucket name based on a unique ID
+# Everything uploaded to Amazon S3 must belong to a bucket. These buckets are
+# in the global namespace, and must have a unique name.
+#
+# For more information about bucket name restrictions, see:
+# http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
 uuid = UUID.new
 bucket_name = "ruby-sdk-sample-#{uuid.generate}"
+bucket = s3.buckets.create(bucket_name)
 
-# create a bucket
-b = s3.buckets.create(bucket_name)
+# Files in Amazon S3 are called "objects" and are stored in buckets. A specific
+# object is referred to by its key (i.e., name) and holds data. Here, we create
+# a new object with the key "ruby_sample_key.txt" and content "Hello World!".
+#
+# For more information on #create, see:
+# http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/ObjectCollection.html#create-instance_method
+object = bucket.objects.create('ruby_sample_key.txt', 'Hello World!')
 
-# upload a file
-basename = File.basename(file_name)
-o = b.objects[basename]
-o.write(:file => file_name)
+# AWS::S3::S3Object#public_url generates an un-authenticated URL for the object.
+# 
+# See: http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/S3Object.html#public_url-instance_method
+puts "Created an object in S3 at:"
+puts object.public_url
 
-puts "Uploaded #{file_name} to:"
-puts o.public_url
-
-# generate a presigned URL
+# Generate a URL for downloading this object without using credentials or
+# modifying the object's permissions. This is called a presigned URL.
+# 
+# See: http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/S3Object.html#url_for-instance_method
 puts "\nUse this URL to download the file:"
-puts o.url_for(:read)
+puts object.url_for(:read)
 
-puts "(press any key to delete the object)"
+puts "(press any key to delete both the bucket and the object)"
 $stdin.getc
 
-o.delete
+# AWS::S3::Bucket#delete! will delete all objects within the bucket and then
+# delete the bucket itself. It is equivalent to a #clear! followed by a #delete.
+#
+# See: http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/S3/Bucket.html#delete%21-instance_method
+puts "Deleting bucket #{bucket_name}"
+bucket.delete!
