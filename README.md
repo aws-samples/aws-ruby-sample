@@ -26,11 +26,11 @@ for more information on getting your keys.
 ## Running the S3 sample
 
 This sample application connects to Amazon's [Simple Storage Service (S3)](http://aws.amazon.com/s3),
-creates a bucket, and uploads a file to that bucket. We've already included a
-file to upload (`hello_world.txt`) and the `upload_file.rb` script will generate
-a unique bucket name for you. All you need to do is run it:
+creates a bucket, and uploads a file to that bucket. The `s3_sample.rb` script
+will generate a unique bucket name for you as well as an object to upload. All
+you need to do is run it:
 
-    ruby s3_sample.rb hello_world.txt
+    ruby s3_sample.rb
 
 The S3 documentation has a good overview of the [restrictions for bucket names](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
 for when you start making your own buckets.
