@@ -45,7 +45,7 @@ bucket.create
 # a reference to a new object with the key "ruby_sample_key.txt" and then
 # "put" the object with the body "Hello World!".
 #
-# For more information on object.put, see:
+# For more information on Aws::S3::Object#put, see:
 # http://docs.aws.amazon.com/sdkforruby/api/Aws/S3/Object.html#put-instance_method 
 object = bucket.object('ruby_sample_key.txt')
 object.put(body: "Hello World!")
