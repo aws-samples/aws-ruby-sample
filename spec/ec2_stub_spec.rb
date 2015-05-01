@@ -8,6 +8,7 @@ RSpec.describe Aws::EC2 do
     before do
       client.stub_responses(
         :describe_instances, {
+          :next_token => nil,
           :reservations => [{:instances=>[{:instance_id => "i-1", :state => {:name => "running"}, :tags =>[{:key => "Name", :value => "example-1" }]}]}]
         }
       )

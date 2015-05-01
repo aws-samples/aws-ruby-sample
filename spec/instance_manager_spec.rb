@@ -12,7 +12,9 @@ RSpec.describe InstanceManager do
     before do
       ec2_client.stub_responses(
         :describe_instances,
-        { :reservations => [{ :instances => [
+        {
+          :next_token => nil,
+          :reservations => [{ :instances => [
           {
             :instance_id => "i-1",
             :state => {:name => "running" },
