@@ -15,7 +15,7 @@ You can also install the SDK directly with:
 ## Basic Configuration
 
 You need to set up your AWS security credentials before the sample code is able
-to connect to AWS. You can do this by creating a file named "credentials" at ~/.aws/ 
+to connect to AWS. You can do this by creating a file named "credentials" at ~/.aws/
 (C:\Users\USER_NAME\.aws\ for Windows users) and saving the following lines in the file:
 
     [default]
@@ -36,6 +36,28 @@ you need to do is run it:
 
 The S3 documentation has a good overview of the [restrictions for bucket names](http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
 for when you start making your own buckets.
+
+## Running the InstanceManager sample
+
+This sample application connects to Amazon's [Elastic Compute Cloud (EC2)](http://aws.amazon.com/ec2/),
+lists the available instances, filters them based on Name tag, and then prints
+useful information about each instance.
+
+All you need to do is run it:
+
+    ruby list_instances.rb
+
+The default regular expression will probably not match any instances in your
+account. To list all instances run:
+
+    ruby list_instances.rb '.*'
+
+RSpec tests for `InstanceManager` are included to demonstrate use of
+[ClientStubs](http://docs.aws.amazon.com/sdkforruby/api/Aws/ClientStubs.html).
+
+Execute rspec to run all the tests:
+
+    rspec
 
 ## License
 
