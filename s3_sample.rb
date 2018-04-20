@@ -47,8 +47,11 @@ bucket.create
 #
 # For more information on Aws::S3::Object#put, see:
 # http://docs.aws.amazon.com/sdkforruby/api/Aws/S3/Object.html#put-instance_method 
-object = bucket.object('ruby_sample_key.txt')
-object.put(body: "Hello World!")
+object = bucket.put_object({
+  acl: "public-read",
+  body: "Hello World!",
+  key: "ruby_sample_key.txt" # required
+})
 
 # Aws::S3::Object#public_url generates an un-authenticated URL for the object.
 # 
